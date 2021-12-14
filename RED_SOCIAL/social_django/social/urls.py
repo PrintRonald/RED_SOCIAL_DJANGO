@@ -14,6 +14,10 @@ urlpatterns = [
     path('post/', views.post, name='post'),
     path('follow/<str:username>', views.follow, name='follow'),
     path('unfollow/<str:username>', views.unfollow, name='unfollow'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # en esta parte fuimos
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)         
+
+ # en esta parte fuimos
 # a la documentacion de django https://docs.djangoproject.com/en/3.1/howto/static-files/#serving-files-uploaded-by-a-user-during-development
 # para poder servir archivos multimedia cargados por el ususario

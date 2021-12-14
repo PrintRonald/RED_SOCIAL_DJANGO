@@ -25,13 +25,12 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     timestamp = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-
+    # las clases meta definen el comportamiento de la clase Post
     class Meta:
-        ordering = ['-timestamp']
-    
+        ordering = ['-timestamp'] # el metodo ordering es para definir si el tiempo sera descandente o ascendente
+        # en este caso es ascendente
     def __str__(self):
         return f'{self.user.username}: {self.content}'
-
 
 class Relationship(models.Model):
     from_user = models.ForeignKey(User,related_name='relationships', on_delete=models.CASCADE)

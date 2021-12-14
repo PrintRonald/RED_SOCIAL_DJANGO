@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import UserRegisterForm, PostForm
-from django.contrib import messages
+from django.contrib import messages # se utiliza para entregar feedback al usuario
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from social_django.settings import MEDIA_ROOT
 # Create your views here.
 
 def feed(request):
@@ -15,8 +16,8 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
             username = form.cleaned_data['username']
+            form.save()
             messages.success(request, f'Usuario {username} creado')
             return redirect('feed')
     else:
@@ -43,9 +44,9 @@ def post(request):
 
 def profile(request, username=None):
     current_user = request.user
-    if username and username != current_user.username:
+    if username and username != current_user.username: # aqui buscamos nuestro perfil o el perfil de otro usuario que queramos visitar
         user = User.objects.get(username=username)
-        posts = user.posts.all() # para mostrar todos los post del ususerio
+        posts = user.posts.all() # para mostrar todos los post del usuario
     else:
         posts = current_user.posts.all()
         user = current_user
@@ -65,7 +66,7 @@ def unfollow(request, username):
     current_user = request.user
     to_user = User.objects.get(username=username)
     to_user_id = to_user.id
-    rel = Relationship.objects.filter(from_user=current_user, to_user=to_user_id).get()
+    rel = Relationship.objects.filter(from_user=current_user.id, to_user=to_user_id).get()
     rel.delete()
     messages.success(request, f'Ya no sigues a {username}')
     return redirect('feed')

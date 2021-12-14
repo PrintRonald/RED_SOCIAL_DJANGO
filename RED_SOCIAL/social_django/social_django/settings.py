@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'social_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'postgres',
+        'NAME': 'redsocial',
+        'PASSWORD':'mr.22873',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -121,10 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/' # declarar url pra que la app acceda a todos los archivos media
+MEDIA_URL ='/media/'  # declarar url pra que la app acceda a todos los archivos media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # se define en donde vamos a crear el directorio 
 
-LOGIN_REDIRECT_URL = 'feed' # para cuando nos registramos nos manda a la url que indiquemos
+LOGIN_REDIRECT_URL = 'feed' # cuando hacemos un login nos redirecciona al feed
 LOGIN_URL = 'login'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

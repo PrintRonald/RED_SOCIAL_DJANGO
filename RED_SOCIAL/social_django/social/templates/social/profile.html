@@ -6,7 +6,9 @@
 <div class="profile">
 	<img src="{{ user.profile.image.url }}">
 	<h2>@{{ user.username }}</h2>
-
+<!-- 
+	ESTA PORCION DE CODIGO PERMITE REVISAR A QUIENES ESTAMOS SIGUIENO Y QUIENES NO 
+ -->
 	{% if request.user.is_authenticated %}
 		{% if user.username != request.user.username %}
 			{% if user not in request.user.profile.following %}
