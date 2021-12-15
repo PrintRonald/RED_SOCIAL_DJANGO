@@ -8,13 +8,14 @@ from social_django.settings import MEDIA_ROOT
 # Create your views here.
 
 def feed(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'social/feed.html',context)
+    if request.method == 'GET': # para poder mostrar las imagenes que subimos ocupamos el metodo GET
+        posts = Post.objects.all() # traemos a la variable posts todos los elementos del objeto Post
+        context = {'posts': posts}
+        return render(request, 'social/feed.html',context)
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST) 
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
@@ -29,13 +30,14 @@ def register(request):
 def post(request):
     current_user = get_object_or_404(User,pk=request.user.pk)
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES) # agregamos los requerimientos de archivos en fila 
         if form.is_valid():
             post = form.save(commit=False)
             post.user = current_user
-            post.save()
+            post.save() 
             messages.success(request, 'Post enviado')
-            return redirect('feed')
+            context = {'form': form}
+            return render(request, 'social/post.html',context)
     else:
         form = PostForm()
     context = {'form': form}

@@ -25,6 +25,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     timestamp = models.DateTimeField(default=timezone.now)
     content = models.TextField()
+    image = models.ImageField(upload_to='media/images')
     # las clases meta definen el comportamiento de la clase Post
     class Meta:
         ordering = ['-timestamp'] # el metodo ordering es para definir si el tiempo sera descandente o ascendente
