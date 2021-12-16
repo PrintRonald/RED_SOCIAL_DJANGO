@@ -149,7 +149,11 @@ time {
 .post{
 	font-size: .94rem;
 }
-
+.imagen{
+  height: 100%;
+  width: 100%;
+  border-color: #43DC7E;
+}
 
 /* PROFILE */
 .profile{
@@ -162,7 +166,6 @@ time {
   height: 100px;
   width: 100px;
   margin-right: 10px;
-  border-radius: 50%;
   margin: 20px;
 }
 .profile h2{
