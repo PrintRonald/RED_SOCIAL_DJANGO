@@ -149,11 +149,6 @@ time {
 .post{
 	font-size: .94rem;
 }
-.imagen{
-  height: 100%;
-  width: 100%;
-  border-color: #43DC7E;
-}
 
 /* PROFILE */
 .profile{
@@ -270,7 +265,7 @@ footer p a {
   color: white;
 }
 
-img.profile{
+img .profile{
   height: 80px;
   width: 80px;
   margin-right: 10px;
